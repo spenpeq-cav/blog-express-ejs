@@ -1,0 +1,28 @@
+<%- include("partials/header") -%>
+
+<h1>Sign Up to Login</h1>
+<form action="/signup" method="post">
+    <div class="form-group">
+        <label for="firstName">First Name</label>
+        <input type="text" name="firstName" id="firstName" class="form-control">
+    </div>
+    <div class="form-group">
+        <label for="lastName">Last Name</label>
+        <input type="text" name="lastName" id="lastName" class="form-control">
+    </div>
+    <div class="form-group">
+        <label for="emailArea">Email</label>
+        <input type="text" name="emailArea" id="emailArea" class="form-control">
+    </div>
+    <div class="form-group">
+        <label for="passwordArea">Password</label>
+        <input type="text" name="passwordArea" id="passwordArea" class="form-control">
+    </div>
+    <div class="form-group">
+        <label for="reasonArea">Reason to Sign Up</label>
+        <textarea class="form-control" name="reasonBody" id="textArea" rows="5" cols="30"></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Sign Up</button>
+</form>
+
+<%- include("partials/footer") -%>

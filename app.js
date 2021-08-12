@@ -74,6 +74,16 @@ app.get("/posts/:postName", function(req,res){
 
 })
 
+app.get("/signup", function(req,res){
+  res.render("signup")
+})
+
+
+app.post("/signup", function(req, res){
+  console.log("Sign Up Triggered")
+})
+
+
 app.listen(3000, function() {
   console.log("Server started on port 3000");
 });
