@@ -33,3 +33,10 @@
 	font-size: 12px;
     color: #fff;
 }
+
+#create {
+    color: rgb(119, 153, 228);
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 10px;
+}

@@ -27,15 +27,14 @@ const postSchema = {
 
 const Post = mongoose.model("Post", postSchema)
 
-let posts = []
-
 
 app.get("/", function(req,res){
-  res.render("home", {
-    startingContent: homeStartingContent,
-    postsArray: posts,
+  Post.find({}, function(err, posts){
+    res.render("home", {
+      startingContent: homeStartingContent,
+      postsArray: posts,
+    })
   })
-  
 })
 
 app.get("/about", function(req,res){
@@ -59,30 +58,31 @@ app.post("/compose", function(req, res){
     title: req.body.postTitle,
     content: req.body.postBody
   })
-  post.save()
-  posts.push(post)
-  res.redirect("/")
+  
+  post.save(function(err){
+    if(!err){
+      res.redirect("/")
+    }
+  })
 })
 
 
-app.get("/posts/:postName", function(req,res){
-  const reqTitle = _.lowerCase(req.params.postName)
+app.get("/posts/:postId", function(req,res){
+  const reqPostId = req.params.postId
   
-  posts.forEach(function(post){
-    
-    if(reqTitle === _.lowerCase(post.title)){
+  Post.findOne({_id: reqPostId}, function(err, post){
+    if(!err){
       res.render("post", {
         title: post.title,
         content: post.content
       })
-    } else {
+    } else{
       res.render("post", {
         title: "Not Found",
-        content: "Sorry the requested post with that title was not found."
+        content: "Sorry the requested post was not found."
       })
     }
   })
-
 })
 
 app.get("/signup", function(req,res){
