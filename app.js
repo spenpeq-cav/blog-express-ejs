@@ -4,6 +4,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const ejs = require("ejs");
 var _ = require('lodash');
+require('dotenv').config();
 
 const mongoose = require("mongoose")
 
@@ -18,7 +19,8 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
 
-mongoose.connect("mongodb://localhost:27017/blogDB", {useNewUrlParser: true, useUnifiedTopology: true})
+const DB_PASS = process.env.DB_PASS
+mongoose.connect("mongodb+srv://admin-spencer:"+ DB_PASS +"@cluster0.9b1ib.mongodb.net/blogDB", {useNewUrlParser: true, useUnifiedTopology: true})
 
 const postSchema = {
   title: String,
