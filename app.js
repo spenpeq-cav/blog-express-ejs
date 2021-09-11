@@ -68,6 +68,17 @@ app.post("/compose", function(req, res){
   })
 })
 
+app.post("/delete", function(req, res){
+  const postId = req.body.postId
+  Post.findByIdAndRemove(postId, function(err){
+    if(err){
+      console.log(err)
+    } else {
+      console.log("Successfully deleted post with id = " + postId)
+    }
+  })
+  res.redirect("/")
+})
 
 app.get("/posts/:postId", function(req,res){
   const reqPostId = req.params.postId
@@ -76,7 +87,8 @@ app.get("/posts/:postId", function(req,res){
     if(!err){
       res.render("post", {
         title: post.title,
-        content: post.content
+        content: post.content,
+        postId: reqPostId
       })
     } else{
       res.render("post", {
